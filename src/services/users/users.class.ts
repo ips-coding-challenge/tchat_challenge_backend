@@ -6,7 +6,7 @@ import { Params } from "@feathersjs/feathers";
 // The Gravatar image service
 const gravatarUrl = "https://s.gravatar.com/avatar";
 // The size query. Our chat needs 60px images
-const query = "s=60";
+const query = "s=60&d=identicon";
 // Returns the Gravatar image for an email
 const getGravatar = (email: string) => {
   // Gravatar uses MD5 hashes from an email address (all lowercase) to get the image
@@ -33,11 +33,12 @@ export class Users extends Service {
     super(options);
   }
 
-  create(data: UserData, params?: Params) {
+  async create(data: UserData, params?: Params) {
     // This is the information we want from the user signup data
-    const { email, password, githubId, name } = data;
+    let { email, password, githubId, name } = data;
     // Use the existing avatar image or return the Gravatar for the email
     const avatar = data.avatar || getGravatar(email);
+
     // The complete user
     const userData = {
       email,
@@ -46,7 +47,7 @@ export class Users extends Service {
       githubId,
       avatar,
     };
-    console.log(`UserData`, userData );
+    console.log(`UserData`, userData);
 
     return super.create(userData, params);
   }

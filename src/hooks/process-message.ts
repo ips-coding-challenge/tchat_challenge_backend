@@ -15,12 +15,12 @@ export default (options = {}): Hook => {
       throw new Error("ChannelId cannot be empty");
     }
 
-    const user = context.params.user;
-    console.log(`user`, user);
+    const { _id, email, avatar } = context.params.user;
+    // console.log(`user`, user);
 
     context.data = {
       content: data.content,
-      userId: user._id,
+      userId: _id,
       channelId: data.channelId,
       createdAt: new Date().getTime(),
     };

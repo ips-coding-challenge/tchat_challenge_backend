@@ -20,7 +20,25 @@ export default {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [
+      async (context: any) => {
+        const { app, result } = context;
+
+        const user = await app.service("users").find({
+          query: {
+            _id: result.userId,
+            $select: ["_id", "email", "avatar"],
+          },
+          paginate: false,
+        });
+
+        console.log(`user`, user);
+        console.log(`user[0]`, user[0]);
+
+        context.result.user = user[0];
+        return context;
+      },
+    ],
     update: [],
     patch: [],
     remove: [],

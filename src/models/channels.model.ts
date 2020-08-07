@@ -12,7 +12,8 @@ export default function (app: Application): Model<any> {
   const schema = new Schema(
     {
       name: { type: String, required: true },
-      userId: { type: Schema.Types.ObjectId, required: true },
+      description: { type: String, required: true },
+      userId: { type: Schema.Types.ObjectId, ref: "users", required: true },
     },
     {
       timestamps: true,

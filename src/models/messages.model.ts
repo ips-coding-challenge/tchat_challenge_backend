@@ -12,8 +12,12 @@ export default function (app: Application): Model<any> {
   const schema = new Schema(
     {
       content: { type: String, required: true },
-      userId: { type: Schema.Types.ObjectId, required: true },
-      channelId: { type: Schema.Types.ObjectId, required: true },
+      userId: { type: Schema.Types.ObjectId, ref: "users", required: true },
+      channelId: {
+        type: Schema.Types.ObjectId,
+        ref: "channels",
+        required: true,
+      },
     },
     {
       timestamps: true,

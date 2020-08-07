@@ -1,7 +1,7 @@
 import * as authentication from "@feathersjs/authentication";
 import populateMessages from "../../hooks/populate-messages";
-// Don't remove this comment. It's needed to format import lines nicely.
-
+import { setField } from "feathers-authentication-hooks";
+import { fastJoin } from "feathers-hooks-common";
 const { authenticate } = authentication.hooks;
 
 export default {
@@ -21,9 +21,9 @@ export default {
         return context;
       },
     ],
-    update: [],
-    patch: [],
-    remove: [],
+    update: [setField({ from: "params.user._id", as: "params.query.userId" })],
+    patch: [setField({ from: "params.user._id", as: "params.query.userId" })],
+    remove: [setField({ from: "params.user._id", as: "params.query.userId" })],
   },
 
   after: {

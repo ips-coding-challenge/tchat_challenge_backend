@@ -10,10 +10,7 @@
     "entity": "user",
     "service": "users",
     "secret": "ZkWFebBPhKiiRRr/7oB9LwlUKFg=",
-    "authStrategies": [
-      "jwt",
-      "local"
-    ],
+    "authStrategies": ["jwt", "local"],
     "jwtOptions": {
       "header": {
         "typ": "access"
@@ -28,10 +25,11 @@
       "passwordField": "password"
     },
     "oauth": {
-      "redirect": "/",
+      "redirect": "http://localhost:3000",
       "github": {
-        "key": "<github oauth key>",
-        "secret": "<github oauth secret>"
+        "key": "d8ffda9f15a66a251a0a",
+        "secret": "28dd1da8775c323887d1b31add00ac2c90441a50",
+        "scope": ["email"]
       }
     }
   },
