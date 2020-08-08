@@ -1,1 +1,4 @@
-{}
+{
+  "nedb": "../test/data",
+  "mongodb": "mongodb://localhost:27017/training_feather_test"
+}

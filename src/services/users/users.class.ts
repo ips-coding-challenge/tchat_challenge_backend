@@ -2,6 +2,7 @@ import crypto from "crypto";
 import { Service, MongooseServiceOptions } from "feathers-mongoose";
 import { Application } from "../../declarations";
 import { Params } from "@feathersjs/feathers";
+import { BadRequest } from "@feathersjs/errors";
 
 // The Gravatar image service
 const gravatarUrl = "https://s.gravatar.com/avatar";
@@ -19,9 +20,10 @@ const getGravatar = (email: string) => {
 };
 
 interface UserData {
-  _id: string;
   email: string;
   password: string;
+  bio?: string;
+  phone?: number;
   name?: string;
   avatar?: string;
   githubId?: string;
@@ -35,7 +37,8 @@ export class Users extends Service {
 
   async create(data: UserData, params?: Params) {
     // This is the information we want from the user signup data
-    let { email, password, githubId, name } = data;
+
+    const { email, password, githubId, name } = data;
     // Use the existing avatar image or return the Gravatar for the email
     const avatar = data.avatar || getGravatar(email);
 
@@ -47,7 +50,7 @@ export class Users extends Service {
       githubId,
       avatar,
     };
-    console.log(`UserData`, userData);
+    console.log("UserData", userData);
 
     return super.create(userData, params);
   }

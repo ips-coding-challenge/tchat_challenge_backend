@@ -19,16 +19,19 @@ class GitHubStrategy extends OAuthStrategy {
   async getEntityData(profile: OAuthProfile, existing: any, params: Params) {
     const baseData = await super.getEntityData(profile, existing, params);
 
-    console.log(`Profile`, profile.login);
-
+    // If the user already exists i don't rewrite informations
+    // Informations are now dependant from the application
+    // So i keep name / avatar / email as there could have been updated at some point
+    // by the user
     return {
       ...baseData,
       // You can also set the display name to profile.name
-      name: profile.login,
+      name: existing && existing.name ? existing.name : profile.login,
       // The GitHub profile image
-      avatar: profile.avatar_url,
+      avatar:
+        existing && existing.avatar ? existing.avatar : profile.avatar_url,
       // The user email address (if available)
-      email: profile.email,
+      email: existing && existing.email ? existing.email : profile.email,
     };
   }
 }

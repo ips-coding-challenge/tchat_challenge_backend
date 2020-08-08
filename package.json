@@ -24,10 +24,11 @@
     "yarn": ">= 0.18.0"
   },
   "scripts": {
-    "test": "yarn run lint && yarn run compile && yarn run jest",
+    "test": "yarn run clean && yarn run lint && yarn run compile && yarn run jest",
     "lint": "eslint src/. test/. --config .eslintrc.json --ext .ts --fix",
     "dev": "ts-node-dev --no-notify src/",
     "start": "yarn run compile && node lib/",
+    "clean": "shx rm -rf test/data/",
     "jest": "jest  --forceExit",
     "compile": "shx rm -rf lib/ && tsc"
   },
@@ -39,6 +40,7 @@
   },
   "types": "lib/",
   "dependencies": {
+    "@feathers-plus/validate-joi": "^3.4.0",
     "@feathersjs/authentication": "^4.5.3",
     "@feathersjs/authentication-local": "^4.5.4",
     "@feathersjs/authentication-oauth": "^4.5.4",
@@ -72,6 +74,7 @@
     "axios": "^0.19.2",
     "eslint": "^7.4.0",
     "jest": "^26.2.2",
+    "nedb": "^1.8.0",
     "shx": "^0.3.2",
     "ts-jest": "^26.1.4",
     "ts-node-dev": "^1.0.0-pre.56",

@@ -1,12 +1,12 @@
-import * as authentication from "@feathersjs/authentication";
-import populateMessages from "../../hooks/populate-messages";
-import { setField } from "feathers-authentication-hooks";
-import { fastJoin } from "feathers-hooks-common";
+import * as authentication from '@feathersjs/authentication';
+import populateMessages from '../../hooks/populate-messages';
+import { setField } from 'feathers-authentication-hooks';
+import { fastJoin } from 'feathers-hooks-common';
 const { authenticate } = authentication.hooks;
 
 export default {
   before: {
-    all: [authenticate("jwt")],
+    all: [authenticate('jwt')],
     find: [],
     get: [],
     create: [
@@ -21,9 +21,9 @@ export default {
         return context;
       },
     ],
-    update: [setField({ from: "params.user._id", as: "params.query.userId" })],
-    patch: [setField({ from: "params.user._id", as: "params.query.userId" })],
-    remove: [setField({ from: "params.user._id", as: "params.query.userId" })],
+    update: [setField({ from: 'params.user._id', as: 'params.query.userId' })],
+    patch: [setField({ from: 'params.user._id', as: 'params.query.userId' })],
+    remove: [setField({ from: 'params.user._id', as: 'params.query.userId' })],
   },
 
   after: {
