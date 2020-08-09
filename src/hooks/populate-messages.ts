@@ -1,16 +1,16 @@
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
-import { Hook, HookContext } from '@feathersjs/feathers';
+import { Hook, HookContext } from "@feathersjs/feathers";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default (options = {}): Hook => {
   return async (context: HookContext): Promise<HookContext> => {
     const { app, method, result, params } = context;
 
-    if (method === 'get') {
+    if (method === "get") {
       try {
         const { result, app } = context;
-        const messages = await app.service('messages').find({
+        const messages = await app.service("messages").find({
           query: {
             $limit: 50,
             channelId: result._id,
@@ -23,12 +23,12 @@ export default (options = {}): Hook => {
           ),
         ];
 
-        const users = await app.service('users').find({
+        const users = await app.service("users").find({
           query: {
             _id: {
               $in: usersId,
             },
-            $select: ['_id', 'email', 'avatar'],
+            $select: ["_id", "name", "email", "avatar"],
           },
           paginate: false,
         });
@@ -58,7 +58,7 @@ export default (options = {}): Hook => {
 
         return context;
       } catch (e) {
-        throw new Error('Error while fetching data');
+        throw new Error("Error while fetching data");
       }
     }
 
