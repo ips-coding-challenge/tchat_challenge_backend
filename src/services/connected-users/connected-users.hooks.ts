@@ -1,5 +1,6 @@
 import * as authentication from "@feathersjs/authentication";
 import { fastJoin } from "feathers-hooks-common";
+import { NotFound } from "@feathersjs/errors";
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
@@ -10,10 +11,11 @@ const userResolver = {
       const user = await context.app.service("users").find({
         query: {
           _id: connectedUser.userId,
-          $select: ["_id", "name", "email"],
+          $select: ["_id", "name", "email", "avatar"],
         },
         paginate: false,
       });
+
       console.log(`user`, user);
       return (connectedUser.user = user[0]);
     },
@@ -30,7 +32,51 @@ export default {
     all: [authenticate("jwt")],
     find: [],
     get: [],
-    create: [],
+    create: [
+      async (context: any) => {
+        const { app, service, data, params } = context;
+        if (params?.connection) {
+          // console.log(`In here`, data.channelId);
+          app.channel(`rooms/${data.channelId}`).join(params.connection);
+        }
+
+        const channel = app.service("channels").get(data.channelId);
+
+        if (!channel) {
+          throw new NotFound("Channel not found");
+        }
+
+        // params.mongoose = { upsert: true };
+        // params.query = {
+        //   userId: params.user._id.toString(),
+        //   channelId: data.channelId.toString(),
+        // };
+
+        const mData = {
+          userId: params.user._id,
+          channelId: data.channelId,
+        };
+        // console.log(`Params`, params);
+
+        try {
+          let result = await service.patch(null, mData, {
+            query: {
+              userId: mData.userId,
+              channelId: mData.channelId,
+            },
+            mongoose: { upsert: true },
+          });
+          context.result = result;
+          return context;
+        } catch (e) {
+          console.log(`E`, e.message);
+        }
+
+        // console.log(`Result`, result);
+
+        return context;
+      },
+    ],
     update: [],
     patch: [],
     remove: [],
@@ -42,7 +88,7 @@ export default {
     get: [],
     create: [],
     update: [],
-    patch: [],
+    patch: [fastJoin(userResolver, (context) => query)],
     remove: [],
   },
 

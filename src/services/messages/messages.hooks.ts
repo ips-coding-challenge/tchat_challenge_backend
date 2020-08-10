@@ -32,8 +32,8 @@ export default {
           paginate: false,
         });
 
-        console.log("user", user);
-        console.log("user[0]", user[0]);
+        // console.log("user", user);
+        // console.log("user[0]", user[0]);
 
         context.result.user = user[0];
         return context;
