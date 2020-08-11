@@ -1,5 +1,5 @@
 {
-  "host": "https://tchat-challenge.herokuapp.com/",
+  "host": "https://tchat-challenge.herokuapp.com",
   "port": "PORT",
   "authentication": {
     "oauth": {
