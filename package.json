@@ -27,10 +27,12 @@
     "test": "yarn run clean && yarn run lint && yarn run compile && yarn run jest",
     "lint": "eslint src/. test/. --config .eslintrc.json --ext .ts --fix",
     "dev": "ts-node-dev --no-notify src/",
-    "start": "yarn run compile && node lib/",
+    "start_backup": "yarn run compile && node lib/",
     "clean": "shx rm -rf test/data/",
     "jest": "jest  --forceExit",
-    "compile": "shx rm -rf lib/ && tsc"
+    "compile": "shx rm -rf lib/ && tsc",
+    "heroku-postbuild": "yarn run compile",
+    "start": "node lib/"
   },
   "standard": {
     "env": [
