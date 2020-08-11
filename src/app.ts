@@ -29,7 +29,7 @@ app.configure(configuration());
 app.use(helmet());
 const corsOptions = {
   credentials: true,
-  origin: `${process.env.CLIENT_URL}${process.env.PORT}`,
+  origin: `${process.env.CLIENT_URL}:${process.env.PORT}`,
 };
 app.use(cors(corsOptions));
 app.use(compress());
