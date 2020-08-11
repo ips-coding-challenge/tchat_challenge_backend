@@ -37,17 +37,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get("public"), "favicon.ico")));
 // Host the public folder
-app.use("/", express.static(app.get("public")));
+// app.use("/", express.static(app.get("public")));
 
 // Test
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(__dirname + "/client/build"));
 
-//   const path = require("path");
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//   });
-// }
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 // Set up Plugins and providers
 app.configure(express.rest());
