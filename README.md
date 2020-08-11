@@ -1,45 +1,9 @@
-# training_feather
+You can find the Demo app here ( If you have some errors, wait a little bit that Heroku server wakes up ;) ):
 
-> 
+https://tchat-challenge.vercel.app/
 
-## About
+You can find the front-end here : https://github.com/ips-coding-challenge/tchat_challenge_frontend
 
-This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
+If you are interested to do the challenge, go here : https://devchallenges.io/challenges/UgCqszKR7Q7oqb4kRfI0
 
-## Getting Started
-
-Getting up and running is as easy as 1, 2, 3.
-
-1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
-2. Install your dependencies
-
-    ```
-    cd path/to/training_feather
-    npm install
-    ```
-
-3. Start your app
-
-    ```
-    npm start
-    ```
-
-## Testing
-
-Simply run `npm test` and all your tests in the `test/` directory will be run.
-
-## Scaffolding
-
-Feathers has a powerful command line interface. Here are a few things it can do:
-
-```
-$ npm install -g @feathersjs/cli          # Install Feathers CLI
-
-$ feathers generate service               # Generate a new Service
-$ feathers generate hook                  # Generate a new Hook
-$ feathers help                           # Show all commands
-```
-
-## Help
-
-For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
+![](https://firebasestorage.googleapis.com/v0/b/devchallenges-1234.appspot.com/o/challengesDesigns%2FChatAppThumbnail.png?alt=media&token=d7d53198-181b-4bdc-a02d-1cbae6cc4fd9)
