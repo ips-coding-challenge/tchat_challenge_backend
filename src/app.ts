@@ -49,7 +49,7 @@ if (process.env.NODE_ENV === "production") {
       //   `Path`,
       //   path.resolve(__dirname, "client", "build", "index.html")
       // );
-      res.sendFile(path.resolve(app.get("client/build"), "index.html"));
+      res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     });
   } catch (e) {
     console.log(`E`, e.message);
