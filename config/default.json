@@ -9,14 +9,14 @@
   "authentication": {
     "entity": "user",
     "service": "users",
-    "secret": "ZkWFebBPhKiiRRr/7oB9LwlUKFg=",
+    "secret": "JWT_SECRET",
     "authStrategies": ["jwt", "local"],
     "jwtOptions": {
       "header": {
         "typ": "access"
       },
-      "audience": "https://yourdomain.com",
-      "issuer": "feathers",
+      "audience": "APP_URL",
+      "issuer": "ips-coding-challenge",
       "algorithm": "HS256",
       "expiresIn": "1d"
     },
@@ -27,8 +27,8 @@
     "oauth": {
       "redirect": "http://localhost:3000",
       "github": {
-        "key": "d8ffda9f15a66a251a0a",
-        "secret": "28dd1da8775c323887d1b31add00ac2c90441a50",
+        "key": "GITHUB_KEY",
+        "secret": "GITHUB_SECRET",
         "scope": ["email"]
       }
     }

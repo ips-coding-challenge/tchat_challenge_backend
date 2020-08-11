@@ -1,4 +1,15 @@
 {
   "host": "training_feather-app.feathersjs.com",
-  "port": "PORT"
+  "port": "PORT",
+  "authentication": {
+    "oauth": {
+      "redirect": "CLIENT_URL",
+      "github": {
+        "key": "GITHUB_KEY",
+        "secret": "GITHUB_SECRET",
+        "scope": ["email"]
+      }
+    }
+  },
+  "mongodb": "DB_URL"
 }
