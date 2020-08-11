@@ -30,7 +30,7 @@ app.use(helmet());
 const corsOptions = {
   origin: process.env.CLIENT_URL,
 };
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
