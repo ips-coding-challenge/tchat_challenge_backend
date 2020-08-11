@@ -46,12 +46,6 @@ export default {
           throw new NotFound("Channel not found");
         }
 
-        // params.mongoose = { upsert: true };
-        // params.query = {
-        //   userId: params.user._id.toString(),
-        //   channelId: data.channelId.toString(),
-        // };
-
         const mData = {
           userId: params.user._id,
           channelId: data.channelId,

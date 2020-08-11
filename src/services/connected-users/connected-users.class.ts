@@ -21,56 +21,18 @@ export class ConnectedUsers extends Service {
     this.app = app;
   }
 
-  // async create(data: Data, params?: Params) {
-  //   console.log(`Data`, data);
-
-  //   // if (params?.connection) {
-  //   //   this.app.channel(`rooms/${data.channelId}`).join(params.connection);
-  //   // }
-
-  //   // TODO
-  //   // I should use find instead of get cause i populate messages in the get hooks
-  //   const channel = await this.app.service("channels").get(data.channelId);
-
-  //   if (!channel) {
-  //     throw new NotFound("That channel doesn't exists");
-  //   }
-  //   console.log(`Channel`, channel);
-
-  //   const newData = {
-  //     userId: params?.user._id,
-  //     channelId: channel._id,
-  //   };
-
-  //   const { _id, name, email } = params?.user;
-
-  //   let final = await super.create(newData, params);
-  //   console.log(`Final`, final);
-  //   return { ...final, user: { _id, name, email } };
-  // }
-
   async remove(id: NullableId, params?: Params) {
-    //the id should be the channelId
-
-    console.log(`params`, params?.query);
-    if (params?.provider === "rest") {
-      if (!params?.query?.channelId) {
-        throw new BadRequest("The channelId is required");
+    console.log(`params`, params);
+    if (params?.provider === "rest" || params?.provider === "socketio") {
+      try {
+        return super.remove(null, {
+          query: {
+            userId: params?.user._id,
+          },
+        });
+      } catch (e) {
+        console.log(`Error while deleting user from connected users`, e);
       }
-
-      const connectedUser = await this.app.service("connected-users").find({
-        query: {
-          userId: params?.user._id,
-          channelId: params?.query?.channelId,
-        },
-        paginate: false,
-      });
-
-      if (!connectedUser) {
-        throw new NotFound();
-      }
-      console.log(`ConnectedUser`, connectedUser);
-      // return super.remove(connectedUser[0]._id, params);
     }
 
     // return await connectedUser.data[0].remove()

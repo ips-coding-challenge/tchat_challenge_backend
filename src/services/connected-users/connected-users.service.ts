@@ -25,7 +25,7 @@ export default function (app: Application): void {
   const service = app.service("connected-users");
 
   service.hooks(hooks);
-  service.options.multi = ["patch"];
+  service.options.multi = ["patch", "remove"];
 
   // service.publish("created", (data, hook) => {
   //   console.log(`From connected user services`, data);

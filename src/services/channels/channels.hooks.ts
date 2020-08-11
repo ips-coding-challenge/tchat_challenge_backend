@@ -1,15 +1,22 @@
 import * as authentication from "@feathersjs/authentication";
 import populateMessages from "../../hooks/populate-messages";
 import { setField } from "feathers-authentication-hooks";
+import Joi from "@hapi/joi";
+import validate from "@feathers-plus/validate-joi";
 import { fastJoin, iff, isProvider } from "feathers-hooks-common";
 const { authenticate } = authentication.hooks;
 
+const createSchema = Joi.object().keys({
+  name: Joi.string().min(3).required(),
+  description: Joi.string().min(10).required(),
+});
 export default {
   before: {
     all: [authenticate("jwt")],
     find: [],
     get: [],
     create: [
+      validate.form(createSchema),
       async (context: any) => {
         const { data } = context;
         const userData = context.params.user;
@@ -17,7 +24,6 @@ export default {
           name: data.name,
           description: data.description,
           userId: userData._id,
-          createdAt: new Date().getTime(),
         };
         return context;
       },

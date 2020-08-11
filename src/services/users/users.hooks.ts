@@ -44,23 +44,25 @@ export default {
     find: [authenticate("jwt")],
     get: [authenticate("jwt"), limitToUser],
     create: [
-      (context: any) => {
-        console.log(`context`, context.params);
-        console.log("isProvide external", isProvider("external"));
-        console.log(`Is provider rest`, isProvider("rest"));
-        console.log(`iff provider`, isProvider("external"));
-        return context;
-      },
-      // iff(isProvider("rest"), validate.form(createSchema)),
+      iff(
+        isProvider("rest") || isProvider("socketio"),
+        validate.form(createSchema)
+      ),
       hashPassword("password"),
     ],
     update: [disallow()],
     patch: [
       authenticate("jwt"),
       limitToUser,
-      iff(isProvider("rest"), validate.form(patchSchema)),
+      iff(
+        isProvider("rest") || isProvider("socketio"),
+        validate.form(patchSchema)
+      ),
       hashPassword("password"),
-      iff(isProvider("rest"), preventChanges(true, "githubId")),
+      iff(
+        isProvider("rest") || isProvider("socketio"),
+        preventChanges(true, "githubId")
+      ),
     ],
     // TODO Authorize an admin to do so ?
     remove: [authenticate("jwt"), disallow()],
