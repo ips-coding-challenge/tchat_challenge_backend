@@ -28,7 +28,8 @@ app.configure(configuration());
 // Enable security, CORS, compression, favicon and body parsing
 app.use(helmet());
 const corsOptions = {
-  origin: process.env.CLIENT_URL,
+  credentials: true,
+  origin: `${process.env.CLIENT_URL}${process.env.PORT}`,
 };
 app.use(cors(corsOptions));
 app.use(compress());
