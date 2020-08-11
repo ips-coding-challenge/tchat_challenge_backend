@@ -39,24 +39,6 @@ app.use(favicon(path.join(app.get("public"), "favicon.ico")));
 // Host the public folder
 app.use("/", express.static(app.get("public")));
 
-// Test
-// if (process.env.NODE_ENV === "production") {
-//   try {
-//     app.use(express.static(path.join(__dirname, "client", "build")));
-
-//     app.get("*", (req, res) => {
-//       // console.log(
-//       //   `Path`,
-//       //   path.resolve(__dirname, "client", "build", "index.html")
-//       // );
-//       res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-//     });
-//   } catch (e) {
-//     console.log(`E`, e.message);
-//   }
-// }
-// }
-
 // Set up Plugins and providers
 app.configure(express.rest());
 app.configure(socketio());
