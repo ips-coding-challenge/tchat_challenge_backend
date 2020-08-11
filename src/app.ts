@@ -41,13 +41,21 @@ app.use(favicon(path.join(app.get("public"), "favicon.ico")));
 
 // Test
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  try {
+    app.use(express.static("client/build"));
 
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
+    app.get("*", (req, res) => {
+      // console.log(
+      //   `Path`,
+      //   path.resolve(__dirname, "client", "build", "index.html")
+      // );
+      res.sendFile(path.resolve(app.get("client/build"), "index.html"));
+    });
+  } catch (e) {
+    console.log(`E`, e.message);
+  }
 }
+// }
 
 // Set up Plugins and providers
 app.configure(express.rest());
