@@ -27,11 +27,16 @@ const app: Application = express(feathers());
 app.configure(configuration());
 // Enable security, CORS, compression, favicon and body parsing
 app.use(helmet());
-const corsOptions = {
-  credentials: true,
-  origin: `${process.env.CLIENT_URL}:${process.env.PORT}`,
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   credentials: true,
+//   origin: `https://tchat-challenge.vercel.app:${process.env.PORT}`,
+// };
+app.use(
+  cors({
+    origin: `https://tchat-challenge.vercel.app`,
+    credentials: true,
+  })
+);
 app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
