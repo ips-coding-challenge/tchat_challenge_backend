@@ -2,18 +2,18 @@
 //
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
-import { Application } from "../declarations";
-import { Model, Mongoose } from "mongoose";
+import { Application } from '../declarations';
+import { Model, Mongoose } from 'mongoose';
 
 export default function (app: Application): Model<any> {
-  const modelName = "channels";
-  const mongooseClient: Mongoose = app.get("mongooseClient");
+  const modelName = 'channels';
+  const mongooseClient: Mongoose = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const schema = new Schema(
     {
       name: { type: String, required: true },
       description: { type: String, required: true },
-      userId: { type: Schema.Types.ObjectId, ref: "users", required: true },
+      userId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
     },
     {
       timestamps: true,

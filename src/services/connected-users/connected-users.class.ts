@@ -1,12 +1,12 @@
-import { Service, MongooseServiceOptions } from "feathers-mongoose";
-import { Application } from "../../declarations";
-import { Params, NullableId } from "@feathersjs/feathers";
+import { Service, MongooseServiceOptions } from 'feathers-mongoose';
+import { Application } from '../../declarations';
+import { Params, NullableId } from '@feathersjs/feathers';
 import {
   NotAuthenticated,
   NotFound,
   MethodNotAllowed,
   BadRequest,
-} from "@feathersjs/errors";
+} from '@feathersjs/errors';
 
 interface Data {
   userId: string;
@@ -22,8 +22,8 @@ export class ConnectedUsers extends Service {
   }
 
   async remove(id: NullableId, params?: Params) {
-    console.log(`params`, params);
-    if (params?.provider === "rest" || params?.provider === "socketio") {
+    console.log('params', params);
+    if (params?.provider === 'rest' || params?.provider === 'socketio') {
       try {
         return super.remove(null, {
           query: {
@@ -31,7 +31,7 @@ export class ConnectedUsers extends Service {
           },
         });
       } catch (e) {
-        console.log(`Error while deleting user from connected users`, e);
+        console.log('Error while deleting user from connected users', e);
       }
     }
 

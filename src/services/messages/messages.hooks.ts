@@ -1,13 +1,13 @@
-import * as authentication from "@feathersjs/authentication";
-import processMessage from "../../hooks/process-message";
-import populateUser from "../../hooks/populate-user";
+import * as authentication from '@feathersjs/authentication';
+import processMessage from '../../hooks/process-message';
+import populateUser from '../../hooks/populate-user';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
 
 export default {
   before: {
-    all: [authenticate("jwt")],
+    all: [authenticate('jwt')],
     find: [],
     get: [],
     create: [processMessage()],
@@ -24,10 +24,10 @@ export default {
       async (context: any) => {
         const { app, result } = context;
 
-        const user = await app.service("users").find({
+        const user = await app.service('users').find({
           query: {
             _id: result.userId,
-            $select: ["_id", "name", "email", "avatar"],
+            $select: ['_id', 'name', 'email', 'avatar'],
           },
           paginate: false,
         });

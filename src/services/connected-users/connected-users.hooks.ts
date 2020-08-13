@@ -1,6 +1,6 @@
-import * as authentication from "@feathersjs/authentication";
-import { fastJoin } from "feathers-hooks-common";
-import { NotFound } from "@feathersjs/errors";
+import * as authentication from '@feathersjs/authentication';
+import { fastJoin } from 'feathers-hooks-common';
+import { NotFound } from '@feathersjs/errors';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
@@ -8,15 +8,15 @@ const { authenticate } = authentication.hooks;
 const userResolver = {
   joins: {
     user: (...args: any) => async (connectedUser: any, context: any) => {
-      const user = await context.app.service("users").find({
+      const user = await context.app.service('users').find({
         query: {
           _id: connectedUser.userId,
-          $select: ["_id", "name", "email", "avatar"],
+          $select: ['_id', 'name', 'email', 'avatar'],
         },
         paginate: false,
       });
 
-      console.log(`user`, user);
+      console.log('user', user);
       return (connectedUser.user = user[0]);
     },
   },
@@ -29,7 +29,7 @@ const query = {
 
 export default {
   before: {
-    all: [authenticate("jwt")],
+    all: [authenticate('jwt')],
     find: [],
     get: [],
     create: [
@@ -40,10 +40,10 @@ export default {
           app.channel(`rooms/${data.channelId}`).join(params.connection);
         }
 
-        const channel = app.service("channels").get(data.channelId);
+        const channel = app.service('channels').get(data.channelId);
 
         if (!channel) {
-          throw new NotFound("Channel not found");
+          throw new NotFound('Channel not found');
         }
 
         const mData = {
@@ -53,7 +53,7 @@ export default {
         // console.log(`Params`, params);
 
         try {
-          let result = await service.patch(null, mData, {
+          const result = await service.patch(null, mData, {
             query: {
               userId: mData.userId,
               channelId: mData.channelId,
@@ -63,7 +63,7 @@ export default {
           context.result = result;
           return context;
         } catch (e) {
-          console.log(`E`, e.message);
+          console.log('E', e.message);
         }
 
         // console.log(`Result`, result);

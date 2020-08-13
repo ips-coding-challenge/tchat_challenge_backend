@@ -25,7 +25,7 @@
       "passwordField": "password"
     },
     "oauth": {
-      "redirect": "http://localhost:PORT",
+      "redirect": "http://localhost",
       "github": {
         "key": "GITHUB_KEY",
         "secret": "GITHUB_SECRET",
