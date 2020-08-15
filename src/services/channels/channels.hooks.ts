@@ -1,10 +1,15 @@
-import * as authentication from '@feathersjs/authentication';
-import populateMessages from '../../hooks/populate-messages';
-import { setField } from 'feathers-authentication-hooks';
-import Joi from '@hapi/joi';
-import validate from '@feathers-plus/validate-joi';
-import { fastJoin, iff, isProvider } from 'feathers-hooks-common';
+import * as authentication from "@feathersjs/authentication";
+import populateMessages from "../../hooks/populate-messages";
+import { setField } from "feathers-authentication-hooks";
+import Joi from "@hapi/joi";
+import validate from "@feathers-plus/validate-joi";
+import { fastJoin, iff, isProvider } from "feathers-hooks-common";
 const { authenticate } = authentication.hooks;
+
+const limitToOwner = setField({
+  from: "params.user._id",
+  as: "params.query.userId",
+});
 
 const createSchema = Joi.object().keys({
   name: Joi.string().min(3).required(),
@@ -12,7 +17,7 @@ const createSchema = Joi.object().keys({
 });
 export default {
   before: {
-    all: [authenticate('jwt')],
+    all: [authenticate("jwt")],
     find: [],
     get: [],
     create: [
@@ -28,15 +33,15 @@ export default {
         return context;
       },
     ],
-    update: [setField({ from: 'params.user._id', as: 'params.query.userId' })],
-    patch: [setField({ from: 'params.user._id', as: 'params.query.userId' })],
-    remove: [setField({ from: 'params.user._id', as: 'params.query.userId' })],
+    update: [limitToOwner],
+    patch: [limitToOwner],
+    remove: [limitToOwner],
   },
 
   after: {
     all: [],
     find: [],
-    get: [iff(isProvider('external'), populateMessages())],
+    get: [iff(isProvider("external"), populateMessages())],
     create: [],
     update: [],
     patch: [],

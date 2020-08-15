@@ -10,6 +10,7 @@ import { setField } from "feathers-authentication-hooks";
 import Joi from "@hapi/joi";
 import validate from "@feathers-plus/validate-joi";
 import { MethodNotAllowed } from "@feathersjs/errors";
+import checkEmailUnique from "../../hooks/check-email-unique";
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = feathersAuthentication.hooks;
@@ -48,6 +49,7 @@ export default {
         isProvider("rest") || isProvider("socketio"),
         validate.form(createSchema)
       ),
+      checkEmailUnique(),
       hashPassword("password"),
     ],
     update: [disallow()],
@@ -63,6 +65,7 @@ export default {
         isProvider("rest") || isProvider("socketio"),
         preventChanges(true, "githubId")
       ),
+      checkEmailUnique(),
     ],
     // TODO Authorize an admin to do so ?
     remove: [authenticate("jwt"), disallow()],
