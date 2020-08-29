@@ -75,6 +75,8 @@
     "@typescript-eslint/eslint-plugin": "^3.8.0",
     "@typescript-eslint/parser": "^3.8.0",
     "axios": "^0.19.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^7.4.0",
     "jest": "^26.2.2",
     "nedb": "^1.8.0",

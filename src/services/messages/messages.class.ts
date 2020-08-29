@@ -32,6 +32,7 @@ export class Messages extends Service {
       },
       {
         $unwind: "$user",
+        preserveNullAndEmptyArrays: true,
       },
       {
         $project: {
