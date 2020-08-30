@@ -33,5 +33,5 @@
       }
     }
   },
-  "mongodb": "mongodb+srv://chat_admin:5sLinuzsciAhVn5R@cluster0.9drj7.mongodb.net/chat_challenge?retryWrites=true&w=majority"
+  "mongodb": "mongodb://localhost:27017/training_feather"
 }
