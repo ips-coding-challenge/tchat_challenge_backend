@@ -3,8 +3,8 @@
   "port": 3030,
   "public": "../public/",
   "paginate": {
-    "default": 10,
-    "max": 50
+    "default": 50,
+    "max": 100
   },
   "authentication": {
     "entity": "user",
@@ -33,5 +33,5 @@
       }
     }
   },
-  "mongodb": "mongodb://localhost:27017/training_feather"
+  "mongodb": "mongodb+srv://chat_admin:5sLinuzsciAhVn5R@cluster0.9drj7.mongodb.net/chat_challenge?retryWrites=true&w=majority"
 }
